@@ -5,6 +5,11 @@ from app import create_app
 app = create_app()
 
 
-# Start the development server
+# Local development only
 if __name__ == "__main__":
-    app.run(debug=True)
+
+    app.run(
+        host="0.0.0.0",
+        port=5000,
+        debug=True
+    )

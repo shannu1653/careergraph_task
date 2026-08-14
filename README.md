@@ -1,16 +1,20 @@
-🚀 CareerGraph
+# 🚀 CareerGraph
 
 <p align="center">
   <strong>Graph-Powered Career Exploration & Skill Recommendation Platform</strong>
 </p>
 
 <p align="center">
-  Discover suitable careers from your skills, identify skill gaps, and get practical learning and project recommendations.
+  Discover suitable careers from your skills, identify skill gaps, and find courses, companies, and projects to grow.
 </p>
 
 <p align="center">
-  <a href="https://careergraph-task-v3m0.onrender.com"><img src="https://img.shields.io/badge/🌐%20Live%20Demo-CareerGraph-5B4CE2?style=for-the-badge" alt="Live Demo"></a>
-  <a href="https://github.com/shannu1653/careergraph_task"><img src="https://img.shields.io/badge/💻%20GitHub-Repository-black?style=for-the-badge&logo=github" alt="GitHub"></a>
+  <a href="https://careergraph-task-v3m0.onrender.com">
+    <img src="https://img.shields.io/badge/🌐%20Live%20Demo-CareerGraph-5B4CE2?style=for-the-badge">
+  </a>
+  <a href="https://github.com/shannu1653/careergraph_task">
+    <img src="https://img.shields.io/badge/💻%20GitHub-Repository-black?style=for-the-badge&logo=github">
+  </a>
 </p>
 
 <p align="center">
@@ -21,103 +25,88 @@
   <img src="https://img.shields.io/badge/JavaScript-ES6-yellow?style=flat-square&logo=javascript">
 </p>
 
-📌 Overview
+---
 
-CareerGraph is a graph-based career exploration application built with CognoDB.
+## 📌 Overview
 
-It connects a user's existing skills to suitable career roles and uses graph relationships to identify:
+**CareerGraph** is a graph-based career recommendation application built with **Flask and CognoDB**.
 
-🎯 Career matches
+It connects a user's skills with suitable career roles and provides:
 
-🧩 Missing skills
+* 🎯 Career matches
+* 🧩 Missing skills
+* 📚 Recommended courses
+* 🏢 Related companies
+* 💻 Practical projects
 
-📚 Recommended courses
+---
 
-🏢 Relevant companies
+## 💡 Why a Graph Database?
 
-💻 Practical projects
+Career recommendations depend on relationships between **skills, careers, courses, companies, and projects**.
 
-The goal is to turn a career recommendation into an actionable learning roadmap.
+A graph database makes these relationships easy to model and traverse, especially for multi-hop recommendations.
 
-💡 Why a Graph Database?
-
-Career recommendations are naturally relationship-driven. A user's skills can connect to multiple careers, while each career connects to required skills, courses, companies, and projects.
-
-A graph model makes these connections explicit and makes multi-hop relationship queries natural compared with repeatedly joining relational tables.
-
+```text
 User
  │
  └── HAS_SKILL ──► Skill
                     │
                     └── REQUIRED_FOR ──► Job Role
                                            │
-                           ┌───────────────┼───────────────┐
-                           ▼               ▼               ▼
-                        Course         Company          Project
+                              ┌────────────┼────────────┐
+                              ▼            ▼            ▼
+                           Course       Company      Project
+```
 
-✨ Key Features
+This allows CareerGraph to answer questions such as:
 
-Feature
+> **"Which career fits my skills, what skills am I missing, and what should I learn or build next?"**
 
-Purpose
+---
 
-🎯 Career Matching
+## ✨ Features
 
-Finds career roles related to existing skills
+| Feature             | Description                            |
+| ------------------- | -------------------------------------- |
+| 🎯 Career Matching  | Finds careers based on user skills     |
+| 📊 Match Percentage | Shows career match strength            |
+| 🧩 Skill Gap        | Identifies missing skills              |
+| 📚 Courses          | Recommends relevant learning resources |
+| 🏢 Companies        | Shows companies related to a career    |
+| 💻 Projects         | Suggests practical projects            |
+| 🔗 Graph Traversal  | Uses connected graph relationships     |
 
-📊 Match Percentage
+---
 
-Shows the strength of a career match
+## 🧠 Graph Model
 
-🧩 Skill Gap Analysis
+### Nodes
 
-Identifies missing skills
-
-📚 Course Recommendations
-
-Suggests learning resources
-
-🏢 Company Recommendations
-
-Shows companies related to a career
-
-💻 Project Recommendations
-
-Suggests practical projects
-
-🔗 Graph Traversal
-
-Uses connected graph relationships
-
-🌐 REST API
-
-Connects frontend and backend
-
-☁️ Hosted Demo
-
-Provides an online application
-
-🧠 Data Model
-
-Nodes
-
+```text
 User
 Skill
 Job Role
 Course
 Company
 Project
+```
 
-Relationships
+### Relationships
 
+```text
 User ──HAS_SKILL──► Skill
 Skill ──REQUIRED_FOR──► Job Role
 Job Role ──RELATED_TO──► Course
 Job Role ──RELATED_TO──► Company
 Job Role ──RELATED_TO──► Project
+```
 
-🔄 Application Flow
+---
 
+## 🔄 Application Flow
+
+```text
 User Skills
      ↓
 Career Matching
@@ -127,137 +116,77 @@ Select Career
 Skill Gap Analysis
      ↓
 Courses + Companies + Projects
+```
 
-Example:
+---
 
-Python + SQL + Django + Git
-              ↓
-       Career Matching
-              ↓
-      Python Developer
-              ↓
-        Missing Skills
-              ↓
-     Courses / Projects
-              ↓
-       Relevant Companies
+## 🏗️ Architecture
 
-🏗️ Architecture
+```text
+Frontend
+HTML / CSS / JavaScript
+        │
+        ▼
+    Flask API
+        │
+        ▼
+  Cypher Queries
+        │
+        ▼
+ Neo4j Python Driver
+        │
+        ▼
+     CognoDB
+```
 
-┌──────────────────────┐
-│       Frontend       │
-│   HTML / CSS / JS    │
-└──────────┬───────────┘
-           │ HTTP / JSON
-           ▼
-┌──────────────────────┐
-│      Flask API       │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│   Cypher Queries     │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│    Neo4j Driver      │
-└──────────┬───────────┘
-           │ Bolt
-           ▼
-┌──────────────────────┐
-│       CognoDB        │
-│   Graph Database     │
-└──────────────────────┘
+---
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 
-Backend: Python, Flask, Official Neo4j Python Driver, Cypher
-Database: CognoDB, openCypher, Bolt
-Frontend: HTML5, CSS3, JavaScript ES6, Fetch API, DOM
-Deployment: Render
+**Backend:** Python, Flask
+**Database:** CognoDB, openCypher, Bolt
+**Driver:** Official Neo4j Python Driver
+**Frontend:** HTML5, CSS3, JavaScript, Fetch API
+**Deployment:** Render
 
-🔌 Main API Endpoints
+---
 
-Method
+## 🔌 Main API
 
-Endpoint
+```text
+GET /api/health
+GET /api/skills
+GET /api/jobs
+GET /api/users/<user_id>/skills
+GET /api/users/<user_id>/career-matches
+GET /api/users/<user_id>/missing-skills/<role_id>
+GET /api/users/<user_id>/courses/<role_id>
+GET /api/jobs/<role_id>/companies
+GET /api/users/<user_id>/projects/<role_id>
+```
 
-Purpose
+---
 
-GET
+## 📁 Project Structure
 
-/api/health
-
-API & database health
-
-GET
-
-/api/skills
-
-Get available skills
-
-GET
-
-/api/jobs
-
-Get career roles
-
-GET
-
-/api/users/<user_id>/skills
-
-Get user skills
-
-GET
-
-/api/users/<user_id>/career-matches
-
-Get career matches
-
-GET
-
-/api/users/<user_id>/missing-skills/<role_id>
-
-Get skill gaps
-
-GET
-
-/api/users/<user_id>/courses/<role_id>
-
-Get recommended courses
-
-GET
-
-/api/jobs/<role_id>/companies
-
-Get related companies
-
-GET
-
-/api/users/<user_id>/projects/<role_id>
-
-Get recommended projects
-
-📁 Project Structure
-
+```text
 careergraph_task/
 │
 ├── app/
-│   ├── __init__.py
 │   ├── database.py
 │   ├── queries.py
 │   └── routes.py
 │
 ├── scripts/
-│   ├── __init__.py
 │   └── seed_database.py
 │
 ├── static/
 │   ├── css/style.css
 │   └── js/app.js
 │
-├── templates/index.html
+├── templates/
+│   └── index.html
+│
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
@@ -265,131 +194,119 @@ careergraph_task/
 ├── test_connection.py
 ├── test_queries.py
 └── README.md
+```
 
-⚙️ Local Setup
+---
 
-1. Clone
+## ⚙️ Run Locally
 
+### 1. Clone
+
+```bash
 git clone https://github.com/shannu1653/careergraph_task.git
 cd careergraph_task
+```
 
-2. Virtual Environment
+### 2. Create Environment
 
+```bash
 python -m venv venv
+```
 
-Windows PowerShell:
+### 3. Activate
 
+**Windows:**
+
+```powershell
 venv\Scripts\activate
+```
 
-3. Install Dependencies
+### 4. Install
 
+```bash
 pip install -r requirements.txt
+```
 
-4. Configure Environment
+### 5. Configure `.env`
 
-Create .env in the project root:
-
+```env
 NEO4J_URI=your_cognodb_uri
 NEO4J_USERNAME=your_username
 NEO4J_PASSWORD=your_password
+```
 
-⚠️ Never commit .env or database credentials to GitHub.
+> ⚠️ Never commit `.env` or database credentials.
 
-5. Seed Data
+### 6. Seed Database
 
+```bash
 python -m scripts.seed_database
+```
 
-6. Run
+### 7. Run
 
+```bash
 python run.py
+```
 
-Open http://127.0.0.1:5000.
+Open:
 
-🧪 Testing
+```text
+http://127.0.0.1:5000
+```
 
+---
+
+## 🧪 Testing
+
+```bash
 python test_connection.py
 python test_queries.py
+```
 
 Health check:
 
-http://127.0.0.1:5000/api/health
+```text
+/api/health
+```
 
-Expected response:
+---
 
-{
-  "success": true,
-  "api": "running",
-  "database": "connected"
-}
+## ☁️ Deployment
 
-☁️ Deployment
+The application is deployed on **Render**.
 
-Hosted on Render.
+**Build:**
 
-Build Command
-
+```bash
 pip install -r requirements.txt
+```
 
-Start Command
+**Start:**
 
+```bash
 gunicorn run:app
+```
 
-Configure:
+Required environment variables:
 
+```text
 NEO4J_URI
 NEO4J_USERNAME
 NEO4J_PASSWORD
+```
 
-🖥️ Screenshots
+---
 
-The assignment requires UI screenshots in the README. Add 2–3 final screenshots such as:
+## 🌐 Links
 
-docs/
-├── dashboard.png
-├── career-matches.png
-└── recommendations.png
+**Live Demo:**
+https://careergraph-task-v3m0.onrender.com
 
-Then use:
+**GitHub:**
+https://github.com/shannu1653/careergraph_task
 
-![CareerGraph Dashboard](docs/dashboard.png)
-![Career Matches](docs/career-matches.png)
-![Recommendations](docs/recommendations.png)
-
-🌐 Links
-
-Resource
-
-Link
-
-🌐 Live Demo
-
-CareerGraph
-
-💻 GitHub
-
-careergraph_task
-
-🎯 Assignment Highlights
-
-This project demonstrates:
-
-Thoughtful graph data modeling
-
-Realistic seeded graph data
-
-Cypher queries and multi-hop traversal
-
-Parameterized database queries
-
-Functional web application
-
-Clean UI/UX
-
-Environment-based configuration
-
-Database error handling
-
-Hosted application deployment
+---
 
 <p align="center">
   <strong>🚀 CareerGraph</strong><br>

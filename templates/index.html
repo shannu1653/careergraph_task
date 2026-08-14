@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CareerGraph</title>
+
+    <!-- Main stylesheet -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- ==================================================
+         Navigation
+         ================================================== -->
+
+    <header class="navbar">
+
+        <div class="container navbar-content">
+
+            <div class="logo">
+                Career<span>Graph</span>
+            </div>
+
+            <nav>
+                <a href="#skills">My Skills</a>
+                <a href="#careers">Careers</a>
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==================================================
+         Main Application
+         ================================================== -->
+
+    <main>
+
+        <!-- Hero Section -->
+
+        <section class="hero">
+
+            <div class="container">
+
+                <p class="eyebrow">
+                    GRAPH-POWERED CAREER EXPLORER
+                </p>
+
+                <h1>
+                    Discover where your
+                    <span>skills</span>
+                    can take you.
+                </h1>
+
+                <p class="hero-description">
+                    Explore career paths based on your existing
+                    skills, discover what you're missing, and
+                    find practical ways to grow.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             Skills Section
+             ================================================== -->
+
+        <section
+            id="skills"
+            class="section"
+        >
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            STEP 01
+                        </p>
+
+                        <h2>
+                            Your Skills
+                        </h2>
+
+                    </div>
+
+                    <p class="section-description">
+                        Skills already associated with your profile.
+                    </p>
+
+                </div>
+
+
+                <!-- Loading state -->
+
+                <div
+                    id="skills-loading"
+                    class="state"
+                >
+                    Loading your skills...
+                </div>
+
+
+                <!-- Skills -->
+
+                <div
+                    id="skills-container"
+                    class="skill-list hidden"
+                >
+                </div>
+
+
+                <!-- Empty state -->
+
+                <div
+                    id="skills-empty"
+                    class="state hidden"
+                >
+                    No skills found.
+                </div>
+
+
+                <!-- Error state -->
+
+                <div
+                    id="skills-error"
+                    class="state error hidden"
+                >
+                    Unable to load your skills.
+                </div>
+
+
+                <button
+                    id="find-careers-btn"
+                    class="primary-button"
+                >
+                    Find My Career Matches
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             Career Section
+             ================================================== -->
+
+        <section
+            id="careers"
+            class="section section-alt"
+        >
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            STEP 02
+                        </p>
+
+                        <h2>
+                            Career Matches
+                        </h2>
+
+                    </div>
+
+                    <p class="section-description">
+                        Careers connected to your current skills.
+                    </p>
+
+                </div>
+
+
+                <!-- Loading -->
+
+                <div
+                    id="careers-loading"
+                    class="state hidden"
+                >
+                    <div class="loader"></div>
+                    <p>
+                    Finding your career matches...
+                    </p>
+                </div>
+
+
+                <!-- Empty -->
+
+                <div
+                    id="careers-empty"
+                    class="state hidden"
+                >
+                    No matching careers found.
+                </div>
+
+
+                <!-- Error -->
+
+                <div
+                    id="careers-error"
+                    class="state error hidden"
+                >
+                    Unable to calculate career matches.
+                </div>
+
+
+                <!-- Career Cards -->
+
+                <div
+                    id="careers-container"
+                    class="career-grid"
+                >
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             Career Details
+             ================================================== -->
+
+        <section
+            id="career-details"
+            class="section hidden"
+        >
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            STEP 03
+                        </p>
+
+                        <h2 id="selected-career-title">
+                            Career Details
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Missing Skills -->
+
+                <div class="details-grid">
+
+                    <div class="detail-card">
+
+                        <h3>
+                            Skills to Learn
+                        </h3>
+
+                        <p class="muted">
+                            Skills you may need for this career.
+                        </p>
+
+                        <div
+                            id="missing-skills-container"
+                            class="recommendation-list"
+                        >
+                        </div>
+
+                    </div>
+
+
+                    <!-- Courses -->
+
+                    <div class="detail-card">
+
+                        <h3>
+                            Recommended Courses
+                        </h3>
+
+                        <p class="muted">
+                            Courses connected to your missing skills.
+                        </p>
+
+                        <div
+                            id="courses-container"
+                            class="recommendation-list"
+                        >
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Companies -->
+
+                <div class="detail-card company-card">
+
+                    <h3>
+                        Companies
+                    </h3>
+
+                    <p class="muted">
+                        Companies associated with this career.
+                    </p>
+
+                    <div
+                        id="companies-container"
+                        class="company-list"
+                    >
+                    </div>
+
+                </div>
+
+
+                <!-- Projects -->
+
+                <div class="detail-card">
+
+                    <h3>
+                        Practical Projects
+                    </h3>
+
+                    <p class="muted">
+                        Projects that can help develop missing skills.
+                    </p>
+
+                    <div
+                        id="projects-container"
+                        class="project-grid"
+                    >
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==================================================
+         Footer
+         ================================================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <p>
+                CareerGraph · Powered by graph relationships
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+
+    <script
+        src="{{ url_for('static', filename='js/app.js') }}"
+    ></script>
+
+</body>
+
+</html>

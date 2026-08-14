@@ -79,6 +79,34 @@ This allows CareerGraph to answer questions such as:
 
 ---
 
+
+## 📸 Application Screenshots
+
+### CareerGraph Dashboard
+
+> Explore your existing skills and discover relevant career paths.
+
+![CareerGraph Dashboard](screenshots/dashboard.png)
+
+### Career Matches
+
+> View career roles ranked according to the user's current skill set.
+
+![Career Matches](screenshots/career-matches.png)
+
+### Career Recommendations
+
+> Explore missing skills, recommended courses, companies, and practical projects.
+
+![Career Details](screenshots/career-details.png)
+
+### CognoDB Graph
+
+> Visual representation of the graph connecting users, skills, job roles, courses, companies, and projects.
+
+![CognoDB Graph](screenshots/cognodb-graph.png)
+
+
 ## 🧠 Graph Model
 
 ### Nodes
@@ -151,6 +179,50 @@ HTML / CSS / JavaScript
 
 ---
 
+
+## 🔍 Key Graph Queries
+
+### 1. Career Matching
+
+Traverses:
+
+User → HAS_SKILL → Skill → REQUIRED_FOR → JobRole
+
+It calculates how many required skills a user already has and returns a match percentage.
+
+### 2. Missing Skills
+
+Traverses:
+
+JobRole → REQUIRED_FOR → Skill
+
+and excludes skills already connected to the user through `HAS_SKILL`.
+
+### 3. Course Recommendations
+
+Traverses:
+
+JobRole → REQUIRED_FOR → Skill ← TEACHES ← Course
+
+This finds courses that teach skills missing for the selected career.
+
+### 4. Project Recommendations
+
+Traverses:
+
+JobRole → REQUIRED_FOR → Skill ← DEVELOPS ← Project
+
+This recommends practical projects that help develop missing skills.
+
+### 5. Company Recommendations
+
+Traverses:
+
+JobRole → OFFERED_BY → Company
+
+This retrieves companies associated with the selected career.
+
+
 ## 🔌 Main API
 
 ```text
@@ -196,6 +268,8 @@ careergraph_task/
 └── README.md
 ```
 
+
+
 ---
 
 ## ⚙️ Run Locally
@@ -230,9 +304,9 @@ pip install -r requirements.txt
 ### 5. Configure `.env`
 
 ```env
-NEO4J_URI=your_cognodb_uri
-NEO4J_USERNAME=your_username
-NEO4J_PASSWORD=your_password
+COGNODB_URI=your_cognodb_uri
+COGNODB_USERNAME=your_username
+COGNODB_PASSWORD=your_password
 ```
 
 > ⚠️ Never commit `.env` or database credentials.
@@ -291,9 +365,9 @@ gunicorn run:app
 Required environment variables:
 
 ```text
-NEO4J_URI
-NEO4J_USERNAME
-NEO4J_PASSWORD
+COGNODB_URI
+COGNODB_USERNAME
+COGNODB_PASSWORD
 ```
 
 ---

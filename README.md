@@ -1,10 +1,6 @@
-Absolutely. Below is the **complete, polished `README.md` in ONE single code block**. You can click the **copy button** on the top-right of the code block and paste it directly into VS Code as `README.md`.
 
-I kept it focused on your **actual CareerGraph task**, with a professional GitHub UI, architecture, graph model, features, API, setup, deployment, and links.
-
-````markdown
 # 🚀 CareerGraph
-
+````markdown
 <p align="center">
   <strong>Graph-Powered Career Exploration & Skill Recommendation Platform</strong>
 </p>

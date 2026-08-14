@@ -1,6 +1,8 @@
+---
 
-# 🚀 CareerGraph
-````markdown
+## Your first lines should look exactly like this in VS Code
+
+```markdown
 <p align="center">
   <strong>Graph-Powered Career Exploration & Skill Recommendation Platform</strong>
 </p>

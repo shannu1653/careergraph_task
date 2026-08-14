@@ -4,46 +4,56 @@ from dotenv import load_dotenv
 from neo4j import GraphDatabase
 
 
-# Load variables from .env
+# Load environment variables.
+# Locally, values come from .env.
+# On Render, values come from Render Environment Variables.
 load_dotenv()
 
 
-# Read CognoDB credentials from environment variables
+# Read CognoDB connection details.
 COGNODB_URI = os.getenv("COGNODB_URI")
 COGNODB_USERNAME = os.getenv("COGNODB_USERNAME", "cognodb")
 COGNODB_PASSWORD = os.getenv("COGNODB_PASSWORD")
 
 
-# Stop the application early if credentials are missing
+# Make sure required credentials exist.
 if not COGNODB_URI or not COGNODB_PASSWORD:
     raise RuntimeError(
-        "COGNODB_URI and COGNODB_PASSWORD must be set in .env"
+        "COGNODB_URI and COGNODB_PASSWORD must be set."
     )
 
 
-# Create the Neo4j driver.
-# CognoDB communicates using the Bolt protocol.
+# Create the Neo4j-compatible driver.
+#
+# CognoDB Cloud provides a secure Bolt URI:
+# bolt+s://...
+#
+# The Neo4j Python driver communicates with CognoDB
+# using the Bolt protocol.
 driver = GraphDatabase.driver(
     COGNODB_URI,
-    auth=(COGNODB_USERNAME, COGNODB_PASSWORD),
+    auth=(
+        COGNODB_USERNAME,
+        COGNODB_PASSWORD,
+    ),
 )
 
 
 def verify_database_connection():
     """
-    Verify that Python can connect to CognoDB.
+    Check whether the application can connect to CognoDB.
     """
 
     try:
         driver.verify_connectivity()
 
-        print("✅ Successfully connected to CognoDB!")
+        print("Successfully connected to CognoDB.")
 
         return True
 
     except Exception as error:
 
-        print("❌ Could not connect to CognoDB")
+        print("Could not connect to CognoDB.")
         print(f"Error: {error}")
 
         return False

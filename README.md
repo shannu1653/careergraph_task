@@ -1,4 +1,4 @@
-# 🚀 CareerGraph
+#  CareerGraph
 
 <p align="center">
   <strong>Graph-Powered Career Exploration & Skill Recommendation Platform</strong>
@@ -380,7 +380,20 @@ https://careergraph-task-v3m0.onrender.com
 **GitHub:**
 https://github.com/shannu1653/careergraph_task
 
+
+## 🎥 Project Demonstration
+
+A complete walkthrough of the CareerGraph application, including the frontend, career matching, recommendations, CognoDB graph, and deployed application.
+
+<p align="center">
+  <a href="https://drive.google.com/file/d/1JlbYzY8HBi4nMTr708bHZ7lUWUoARUm1/view?usp=sharing">
+    <strong>▶️ Watch Project Demo</strong>
+  </a>
+</p>
+
 ---
+
+
 
 <p align="center">
   <strong>🚀 CareerGraph</strong><br>
